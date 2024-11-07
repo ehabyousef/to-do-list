@@ -1,7 +1,7 @@
 import StatusBadge from "@/components/StatusBadge";
 import prisma from "@/utils/db";
 import Link from "next/link";
-
+// export const dynamic = "force-dynamic";
 export default async function Home() {
   const tasks = await prisma.task.findMany();
   console.log(tasks);

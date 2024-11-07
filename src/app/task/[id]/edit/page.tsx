@@ -1,12 +1,9 @@
 import prisma from "@/utils/db";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { updateTask } from "@/utils/actions";
 
-interface EditTaskPageProps {
-  params: { id: string };
-}
-
-const EditTaskPage = async ({ params }: EditTaskPageProps) => {
+const EditTaskPage = async ({ params }: { params: { id: string } }) => {
   const task = await prisma.task.findUnique({
     where: { id: parseInt(params.id) },
   });
@@ -20,7 +17,7 @@ const EditTaskPage = async ({ params }: EditTaskPageProps) => {
       </Link>
       <div className="w-2/3 mx-auto rounded-md p-5 bg-slate-800 border-2 border-gray-300">
         <h1 className="mb-7 font-bold text-3xl">Edit Task</h1>
-        <form className="flex flex-col gap-6">
+        <form action={updateTask} className="flex flex-col gap-6">
           <input type="hidden" value={task.id} name="id" />
           <input
             type="text"

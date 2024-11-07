@@ -2,6 +2,7 @@ import prisma from "@/utils/db";
 import Link from "next/link";
 import StatusBadge from "@/components/StatusBadge";
 import { notFound } from "next/navigation";
+import { deleteTask } from "@/utils/actions";
 
 interface TaskDetailsPageProps {
   params: { id: string };
@@ -27,7 +28,7 @@ const TaskDetailsPage = async ({ params }: TaskDetailsPageProps) => {
           >
             Edit
           </Link>
-          <form>
+          <form action={deleteTask}>
             <input type="hidden" name="id" value={task.id} />
             <button
               type="submit"
